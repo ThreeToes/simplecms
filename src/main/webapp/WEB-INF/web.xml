@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
   <display-name>Simple CMS</display-name>
         <!-- Define the spring dispatcher and make it load at startup -->
-	<servlet>
-		<servlet-name>mvc-dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-        <!-- Map a URL path to the servlet defined above -->
-	<servlet-mapping>
-		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
+	<listener>
+            <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        </listener>
+        <context-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:/spring/services-beans.xml</param-value>
+        </context-param>
+        
+        <servlet>
+		<servlet-name>mvc-dispatcher-servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -21,17 +21,10 @@
 				classpath:/spring/mvc-dispatcher-servlet.xml
 			</param-value>
 		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher-servlet</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-        <!-- Tell Java where to find the MVC servlet -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
-	</context-param>
-
-        <!-- Activate the listener to enable Spring to integrate with this application -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
 </web-app>
