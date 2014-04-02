@@ -18,20 +18,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContentServiceImpl implements ContentService {
     @Autowired
-    private ContentDao _contentDao;
+    private ContentDao contentDao;
     
     @Override
     public void create(Content content) {
-        _contentDao.create(content);
+        contentDao.create(content);
     }
 
     @Override
     public Content getContent(Long id) {
-        return _contentDao.get(id);
+        return contentDao.get(id);
     }
     
     @Override
     public Iterable<Content> getAll(){
-        return _contentDao.getAll();
+        return contentDao.getAll();
     }
 }

@@ -1,4 +1,4 @@
-package com.stephengream.simplecms.controllers;
+package com.stephengream.simplecms.web.controllers;
 
 //Spring imports
 import org.springframework.stereotype.Controller;
