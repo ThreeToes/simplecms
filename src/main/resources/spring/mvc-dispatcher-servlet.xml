@@ -13,6 +13,7 @@
 
         <!-- Activte the annotation driven implementations-->
         <mvc:annotation-driven />
+	<mvc:default-servlet-handler />
     
         <!-- Load up all controllers in the com.stephengream.simplecms.controllers package. Saves having a seperate bean entry for ever controller -->
 	<context:component-scan base-package="com.stephengream.simplecms.controllers" />
