@@ -33,7 +33,7 @@
             <div>${body}</div>
             <div>
                 <div>
-                    <form:input path="body"  />
+                    <form:textarea path="body"  />
                 </div>
                 <form:errors path="body">
                     <div><form:errors path="body" htmlEscape="false" /></div>
@@ -42,7 +42,7 @@
             <div class="gridRow yui-gf">
                 <div class="yui-u first"></div>
                 <div class="yui-u">
-                    <input type="submit" value="${submit}"></input>
+                    <input type="submit" value="${submit}" />
                 </div>
 		</div>
         </form:form>

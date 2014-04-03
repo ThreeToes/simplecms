@@ -31,6 +31,7 @@ public class ContentController {
     @Inject private ContentService contentService;
     private static final String VIEW_CONTENT_NEW_CONTENT = "content/newcontent";
     private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:contentok";
+    private static final String VIEW_CONTENT_ALL_CONTENT = "content/allContent";
     
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String getNewContentForm(Model model){
@@ -46,6 +47,12 @@ public class ContentController {
             contentService.create(toContent(form));
         }
         return result.hasErrors() ? VIEW_CONTENT_NEW_CONTENT : VIEW_CONTENT_POST_SUCCESS;
+    }
+    
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String getAllContent(Model model){
+        model.addAttribute("nodes", contentService.getAll());
+        return VIEW_CONTENT_ALL_CONTENT;
     }
     
     @InitBinder
