@@ -8,6 +8,7 @@ package com.stephengream.simplecms.service;
 
 import com.stephengream.simplecms.domain.model.Content;
 import com.stephengream.simplecms.dao.ContentDao;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,19 @@ public class ContentServiceImpl implements ContentService {
     private ContentDao contentDao;
     
     @Override
+    @Transactional
     public void create(Content content) {
         contentDao.create(content);
     }
 
     @Override
+    @Transactional
     public Content getContent(Long id) {
         return contentDao.get(id);
     }
     
     @Override
+    @Transactional
     public Iterable<Content> getAll(){
         return contentDao.getAll();
     }
