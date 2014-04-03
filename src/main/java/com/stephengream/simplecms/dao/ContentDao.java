@@ -6,7 +6,7 @@
 
 package com.stephengream.simplecms.dao;
 
-import com.stephengream.domain.model.Content;
+import com.stephengream.simplecms.domain.model.Content;
 
 /**
  *

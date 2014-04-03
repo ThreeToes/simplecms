@@ -6,9 +6,10 @@
 
 package com.stephengream.simplecms.web.controllers;
 
-import com.stephengream.domain.model.Content;
-import com.stephengream.domain.web.forms.ContentForm;
+import com.stephengream.simplecms.domain.model.Content;
 import com.stephengream.simplecms.service.ContentService;
+import com.stephengream.simplecms.web.forms.ContentForm;
+import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ContentController {
     @Inject private ContentService contentService;
     private static final String VIEW_CONTENT_NEW_CONTENT = "content/newcontent";
-    private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:content/contentok";
+    private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:contentok";
     
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String getNewContentForm(Model model){
@@ -59,6 +60,7 @@ public class ContentController {
         Content c = new Content();
         c.setBody(form.getBody());
         c.setTitle(form.getTitle());
+        c.setCreated(new Date());
         return c;
     }
 }

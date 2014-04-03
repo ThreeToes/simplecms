@@ -6,7 +6,7 @@
 
 package com.stephengream.simplecms.service;
 
-import com.stephengream.domain.model.Content;
+import com.stephengream.simplecms.domain.model.Content;
 import com.stephengream.simplecms.dao.ContentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -6,7 +6,7 @@
 
 package com.stephengream.simplecms.service;
 
-import com.stephengream.domain.model.Content;
+import com.stephengream.simplecms.domain.model.Content;
 import org.springframework.stereotype.Service;
 
 /**

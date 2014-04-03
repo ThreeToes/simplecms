@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
         xmlns:jee="http://www.springframework.org/schema/jee"
@@ -35,20 +36,19 @@
         <prop key="hibernate.current_session_context_class">thread</prop>
         <prop key="hibernate.hbm2ddl.auto">create</prop>
     </util:properties>
-        <bean id="sessionFactory"
+    <bean id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">
-            <property name="packagesToScan">
-                <list>
-                    <value>com.stephengream.simplecms.service</value>
-                    <value>com.stephengream.simplecms.domain.model</value>
-                </list>
-            </property>
-            <property name="hibernateProperties" ref="hibernateProperties" />
-            <property name="dataSource" ref="dataSource" />
-        </bean> 
-        <bean id="transactionManager"
+        <property name="packagesToScan">
+            <list>
+                <value>com.stephengream.simplecms.domain.model</value>
+            </list>
+        </property>
+        <property name="hibernateProperties" ref="hibernateProperties" />
+        <property name="dataSource" ref="dataSource" />
+    </bean> 
+    <bean id="transactionManager"
             class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-            <property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        <tx:annotation-driven />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven />
 </beans>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.stephengream.domain.model;
+package com.stephengream.simplecms.domain.model;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author Stephen
  */
 @Entity
-@Table(name = "Account")
+@Table(name = "Content")
 public class Content {
     private Long id;
     private String body, title;

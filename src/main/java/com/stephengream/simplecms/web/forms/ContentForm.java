@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.stephengream.domain.web.forms;
+package com.stephengream.simplecms.web.forms;
 
 import javax.validation.constraints.NotNull;
 
