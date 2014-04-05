@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.stephengream.simplecms.web.forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,6 +11,7 @@ public class ContentForm {
     private String title, body;
     
     @NotNull
+    @Size(min = 1, max = 255)
     public String getTitle(){
         return this.title;
     }
@@ -25,6 +21,7 @@ public class ContentForm {
     }
     
     @NotNull
+    @Size(min = 1)
     public String getBody(){
         return this.body;
     }

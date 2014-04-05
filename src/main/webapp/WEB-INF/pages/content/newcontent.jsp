@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<!-- Pulling data from messages.properties -->
 <spring:message var="pageTitle" code="newcontent.label.pageTitle" />
 <spring:message var="title" code="newcontent.label.title" />
 <spring:message var="body" code="newcontent.label.body" />
@@ -20,21 +21,26 @@
         <title>${pageTitle}</title>
     </head>
     <body>
+        <!-- Spring form  -->
         <form:form action="new" modelAttribute="content">
             <div>${title}</div>
             <div>
                 <div>
+                    <!-- Input box for the title -->
                     <form:input path="title"  />
                 </div>
                 <form:errors path="title">
+                    <!-- Errors for the title field -->
                     <div><form:errors path="title" htmlEscape="false" /></div>
                 </form:errors>
                 </div>
             <div>${body}</div>
             <div>
                 <div>
+                    <!-- Input box for the body field -->
                     <form:textarea path="body"  />
                 </div>
+                <!-- Errors found for the body field -->
                 <form:errors path="body">
                     <div><form:errors path="body" htmlEscape="false" /></div>
                 </form:errors>

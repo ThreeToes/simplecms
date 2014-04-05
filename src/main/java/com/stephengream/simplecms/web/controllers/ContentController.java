@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.stephengream.simplecms.web.controllers;
 
 import com.stephengream.simplecms.domain.model.Content;
@@ -20,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -32,6 +27,7 @@ public class ContentController {
     private static final String VIEW_CONTENT_NEW_CONTENT = "content/newcontent";
     private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:contentok";
     private static final String VIEW_CONTENT_ALL_CONTENT = "content/allContent";
+    protected static final String VIEW_CONTENT_SINGLE = "content/singlenode";
     
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String getNewContentForm(Model model){
@@ -53,6 +49,15 @@ public class ContentController {
     public String getAllContent(Model model){
         model.addAttribute("nodes", contentService.getAll());
         return VIEW_CONTENT_ALL_CONTENT;
+    }
+    
+    @RequestMapping
+    public String getSingleContent(
+            @RequestParam(value = "id") long id,
+            Model model){
+        Content c = this.contentService.getContent(id);
+        model.addAttribute("content", c);
+        return VIEW_CONTENT_SINGLE;
     }
     
     @InitBinder
