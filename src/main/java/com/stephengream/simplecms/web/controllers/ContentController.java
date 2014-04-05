@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,7 @@ public class ContentController {
     private static final String VIEW_CONTENT_NEW_CONTENT = "content/newcontent";
     private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:contentok";
     private static final String VIEW_CONTENT_ALL_CONTENT = "content/allContent";
-    protected static final String VIEW_CONTENT_SINGLE = "content/singlenode";
+    protected static final String VIEW_CONTENT_SINGLE = "content/contentsingle";
     
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String getNewContentForm(Model model){
@@ -51,9 +52,9 @@ public class ContentController {
         return VIEW_CONTENT_ALL_CONTENT;
     }
     
-    @RequestMapping
+    @RequestMapping(value = {"/node/{nodeId}"}, method = RequestMethod.GET)
     public String getSingleContent(
-            @RequestParam(value = "id") long id,
+            @PathVariable("nodeId") Long id,
             Model model){
         Content c = this.contentService.getContent(id);
         model.addAttribute("content", c);
