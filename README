@@ -8,4 +8,4 @@ blog-1: commit from the end of blog post one: http://www.stephengream.com/blog_e
 blog-1.5: commit from the end of blog post 1.5: http://www.stephengream.com/blog_entry/spring-framework-15-externalising-strings
 blog-2: commit from http://www.stephengream.com/blog_entry/spring-framework-2-setting-hibernate-orm
 blog-3: commit from http://www.stephengream.com/blog_entry/spring-framework-3-adding-data-access-layer
-blog-4: commit from http://www.stephengream.com/blog_entry/spring-framework-4-forms-and-submission
+blog-4.2: commit from http://www.stephengream.com/blog_entry/spring-framework-4-forms-and-submission
