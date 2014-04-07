@@ -38,7 +38,7 @@
             <div>
                 <div>
                     <!-- Input box for the body field -->
-                    <form:textarea path="body"  />
+                    <form:textarea path="body" />
                 </div>
                 <!-- Errors found for the body field -->
                 <form:errors path="body">
