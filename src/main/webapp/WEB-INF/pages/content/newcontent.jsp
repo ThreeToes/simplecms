@@ -31,7 +31,7 @@
                 </div>
                 <form:errors path="title">
                     <!-- Errors for the title field -->
-                    <div><form:errors path="title" htmlEscape="false" /></div>
+                    <div><form:errors path="title" /></div>
                 </form:errors>
                 </div>
             <div>${body}</div>
@@ -42,7 +42,7 @@
                 </div>
                 <!-- Errors found for the body field -->
                 <form:errors path="body">
-                    <div><form:errors path="body" htmlEscape="false" /></div>
+                    <div><form:errors path="body" /></div>
                 </form:errors>
             </div> 
             <div class="gridRow yui-gf">
