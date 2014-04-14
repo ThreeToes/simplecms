@@ -34,7 +34,7 @@ public class Content {
     }
     
     @NotNull
-    @Column(name = "body")
+    @Column(name = "body", columnDefinition = "TEXT")
     public String getBody(){
         return this.body;
     }
@@ -44,7 +44,7 @@ public class Content {
     }
     
     @NotNull
-    @Column(name = "title", columnDefinition = "TEXT")
+    @Column(name = "title")
     public String getTitle(){
         return this.title;
     }
