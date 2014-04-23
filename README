@@ -9,3 +9,4 @@ blog-1.5: commit from the end of blog post 1.5: http://www.stephengream.com/blog
 blog-2: commit from http://www.stephengream.com/blog_entry/spring-framework-2-setting-hibernate-orm
 blog-3: commit from http://www.stephengream.com/blog_entry/spring-framework-3-adding-data-access-layer
 blog-4.2: commit from http://www.stephengream.com/blog_entry/spring-framework-4-forms-and-submission
+blog-5: commit from http://www.stephengream.com/blog_entry/spring-framework-5-spring-security
