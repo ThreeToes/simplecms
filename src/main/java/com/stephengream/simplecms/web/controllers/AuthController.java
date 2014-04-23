@@ -36,6 +36,8 @@ public class AuthController {
     public ModelAndView login(
             @RequestParam(value = "error", required = false) String error, 
             @RequestParam(value = "logout", required = false) String logout){
+        //Not sure why, but CSRF protection wouldn't work without using this 
+        //way of doing things
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", "Invalid username and password!");
