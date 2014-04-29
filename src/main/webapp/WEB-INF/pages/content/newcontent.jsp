@@ -18,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${pageTitle}</title>
+        <title th:text="#{newcontent.label.pageTitle}">New content node</title>
     </head>
     <body>
         <!-- Spring form  -->

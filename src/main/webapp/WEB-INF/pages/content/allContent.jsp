@@ -1,27 +1,13 @@
-<%-- 
-    Document   : allContent
-    Created on : Apr 3, 2014, 11:55:24 AM
-    Author     : Stephen
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-<spring:message var="pageTitle" code="allContent.label.pageTitle" />
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${pageTitle}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title th:text="#{allContent.label.pageTitle}">All Content</title>
     </head>
     <body>
-        <c:forEach var="node" items="${nodes}">
-            <div>
-                <h2>${node.title}</h2>
-                <div>${node.body}</div>
-            </div>
-        </c:forEach>
+        <div th:each="node : ${nodes}">
+            <h2 th:text="${node.title}">Content title</h2>
+            <div th:text="${node.body}">Content body</div>
+        </div>
     </body>
 </html>
