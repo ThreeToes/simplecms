@@ -1,24 +1,13 @@
-<%-- 
-    Document   : contentsingle
-    Created on : Apr 5, 2014, 9:25:52 AM
-    Author     : Stephen
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-<spring:message var="pageTitle" code="singlecontent.label.pageTitle" />
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${pageTitle} ${content.title}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title th:text="#{singlecontent.label.pageTitle} ${content.title}">Content Node</title>
     </head>
     <body>
-        <h1>${content.title}</h1>
-        <div>
-            ${content.body}
+        <h1 th:text="${content.title}">Node title</h1>
+        <div th:text="${content.body}">
+            Node body
         </div>
     </body>
 </html>
