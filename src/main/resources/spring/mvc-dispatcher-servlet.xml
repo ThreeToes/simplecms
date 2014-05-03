@@ -28,7 +28,6 @@
         <!-- Register Thymeleaf's view resolver and pass it the path to the view folder -->        
         <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
             <property name="prefix" value="/WEB-INF/pages/" />
-            <!-- For now this is JSP, need to rename everything to be .html files instead -->
             <property name="suffix" value=".html" />
             <property name="templateMode" value="HTML5" />
         </bean>
