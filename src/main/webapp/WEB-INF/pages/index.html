@@ -8,11 +8,11 @@
         <title th:text="#{index.label.pageTitle}">Index page</title>
     </head>
     <body>
-        <div class="">
             <div class="header" th:replace="templates/header :: header"></div>
+            <div class="content">
             <!-- Just print the message from the ModelMap object we were passed -->
             <h1 th:text="${message}">Hello, world!</h1>
+            </div>
             <div class="footer" th:replace="templates/footer :: footer"></div>
-        </div>
     </body>
 </html>

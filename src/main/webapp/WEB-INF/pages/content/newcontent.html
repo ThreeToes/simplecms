@@ -2,6 +2,9 @@
 <!-- The th namespace is declared like so -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <link th:href="@{/resources/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/resources/maintheme/main.css}" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!-- 
             Using the # notation in this way will use a string defined 
@@ -11,6 +14,8 @@
         <title th:text="#{newcontent.label.pageTitle}">New content node</title>
     </head>
     <body>
+        <div class="header" th:replace="templates/header :: header"></div>
+        <div class="container">
         <!-- 
             The th:action attribute along with the @ annotated path provide 
             an application relative path. This becomes /simplecms/content/new
@@ -67,5 +72,7 @@
                 </div>
             </div>
         </form>
+        </div>
+        <div class="footer" th:replace="templates/footer :: footer"></div>
     </body>
 </html>
