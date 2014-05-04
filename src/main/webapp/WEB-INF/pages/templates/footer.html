@@ -23,14 +23,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
-        <div th:fragment="footer" class="footer">
-            <footer>
-                <p>
-                    SimpleCMS, Stephen Gream 2014
-                </p>
-            </footer>
+        <footer th:fragment="footer" class="footer navbar navbar-fixed-bottom">
+            <p>
+                SimpleCMS, Stephen Gream 2014
+            </p>
             <script th:src="@{/resources/js/jquery-2.1.0.min.js}"></script>
             <script th:src="@{/resources/bootstrap/js/bootstrap.min.js}"></script>
-        </div>
+        </footer>
     </body>
 </html>
