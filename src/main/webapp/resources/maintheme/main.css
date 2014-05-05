@@ -16,3 +16,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+.content{
+    width: 100%;
+    float: left;
+}
+
+.header{
+}
+
+.login-panel{
+    float: right;
+    margin-right: 1em;
+    margin-top: 1em;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.nav-links{
+    float: left;
+    vertical-align: middle;
+}
