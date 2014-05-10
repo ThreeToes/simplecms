@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                         </a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/content/}">All content</a></li>
-                            <li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a th:href="@{/content/new}">New content</a>
                             </li>
                         </ul>
@@ -41,7 +41,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                  </ul>
             </div>
             <div class="text-right login-panel">
-                <a th:href="@{/authentication/login}">Login</a>
+                <div sec:authorize="isAuthenticated()">
+                    <p style="text-align: center">Welcome <span sec:authentication="name">Bob</span> | <a th:href="@{/authentication/login?logout}">Logout</a></p>
+                </div> 
+                <div sec:authorize="isAnonymous()"><a th:href="@{/authentication/login}" >Login</a></div>
             </div>
         </header>
     </body>

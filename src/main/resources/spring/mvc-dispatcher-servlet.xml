@@ -20,6 +20,7 @@
     
         <!-- Load up all controllers in the com.stephengream.simplecms.controllers package. Saves having a seperate bean entry for ever controller -->
 	<context:component-scan base-package="com.stephengream.simplecms.web.controllers" />
+                
         <!-- Load up the messages.properties file -->
         <bean id="messageSource" 
             class="org.springframework.context.support.ReloadableResourceBundleMessageSource"

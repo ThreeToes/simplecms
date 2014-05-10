@@ -7,10 +7,11 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
  
+    
     <!-- Set our login URLs and define what URLs require special access privileges -->
-    <http auto-config="true">
+    <http auto-config="true" use-expressions="true">
         <!-- Set a whitelist for the new content page. Only admins can access it -->
-        <intercept-url pattern="/content/new" access="ROLE_ADMIN" />
+        <intercept-url pattern="/content/new" access="hasRole('ROLE_ADMIN')" />
         <form-login 
             login-page="/authentication/login" 
             default-target-url="/authentication/success" 
@@ -22,7 +23,7 @@
         <!-- enable csrf protection -->
         <csrf />
     </http>
- 
+    
     <!-- Set up our authentication manager -->
     <authentication-manager>
         <!-- Give our system 1 provider to use in  -->
