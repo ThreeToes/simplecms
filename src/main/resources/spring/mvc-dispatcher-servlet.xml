@@ -37,6 +37,7 @@
             <property name="templateResolver" ref="templateResolver" />
             <property name="additionalDialects">
                 <set>
+                    <!-- Set up the Spring security dialect in templates -->
                     <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
                 </set>
             </property>
