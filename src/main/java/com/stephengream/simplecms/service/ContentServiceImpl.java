@@ -8,8 +8,8 @@ package com.stephengream.simplecms.service;
 
 import com.stephengream.simplecms.domain.model.Content;
 import com.stephengream.simplecms.dao.ContentDao;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ContentServiceImpl implements ContentService {
-    @Autowired
+    @Inject
     private ContentDao contentDao;
     
     @Override
