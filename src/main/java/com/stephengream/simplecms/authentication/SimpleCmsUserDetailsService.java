@@ -31,7 +31,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- *
+ * Class to integrate our user type with 
  * @author Stephen
  */
 public class SimpleCmsUserDetailsService implements UserDetailsService{
