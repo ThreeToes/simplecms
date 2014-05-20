@@ -22,7 +22,9 @@ import com.stephengream.simplecms.dao.UserDao;
 import com.stephengream.simplecms.domain.model.CmsUser;
 import com.stephengream.simplecms.domain.model.Role;
 import java.util.HashSet;
+import java.util.Set;
 import javax.inject.Inject;
+import org.jboss.logging.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -45,9 +47,18 @@ public class SimpleCmsUserDetailsService implements UserDetailsService{
             throw new UsernameNotFoundException(username + " not found");
         }
         HashSet<GrantedAuthority> roles = new HashSet<>();
-        for(Role role : u.getRoles()){
-            roles.add(new SimpleGrantedAuthority(role.getRoleName()));
+        try{
+            final Set<Role> userRoles = u.getRoles();
+            if(userRoles != null && userRoles.size() > 0){
+                for(Role role : userRoles){
+                    roles.add(new SimpleGrantedAuthority(role.getRoleName()));
+                }
+            }
+        }catch(Exception e){
+            Logger.getLogger(UserDetails.class.getName()).log(Logger.Level.INFO, "Fucking cunt can't load the shitting cock roles " + e.getMessage());
+            Logger.getLogger(UserDetails.class.getName()).log(Logger.Level.INFO, e.getStackTrace());
         }
+        
         return new User(u.getUsername(), u.getPassHash(), roles);
     }
     

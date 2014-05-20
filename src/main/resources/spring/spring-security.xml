@@ -30,15 +30,15 @@
     <!-- Set up our authentication manager -->
     <authentication-manager>
         <!-- Give our system 1 provider to use in  -->
-        <authentication-provider>
+<!--        <authentication-provider>
             <user-service>
-                <!-- 
+                 
                     Define our user with username stephen and password 123456
                     We'll also give this user the roles of admin and user 
-                -->
+                
                 <user name="stephen" password="123456" authorities="ROLE_ADMIN,ROLE_USER" />
             </user-service>
-        </authentication-provider>
+        </authentication-provider>-->
         <authentication-provider user-service-ref="customUserDetails">
             <password-encoder ref="customPasswordEncoder" />
         </authentication-provider>

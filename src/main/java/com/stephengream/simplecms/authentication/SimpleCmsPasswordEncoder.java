@@ -39,11 +39,13 @@ public class SimpleCmsPasswordEncoder implements PasswordEncoder{
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(SimpleCmsPasswordEncoder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "";
+        return null;
     }
 
     @Override
     public boolean matches(CharSequence submitted, String retrieved) {
+        Logger.getLogger(SimpleCmsPasswordEncoder.class.getName())
+                .log(Level.INFO, "submitted = " + submitted.toString() + ", retrieved = " + retrieved);
         try {
             //String hash = PasswordHash.createHash(submitted.toString());
             return PasswordHash.validatePassword(submitted.toString(), retrieved);

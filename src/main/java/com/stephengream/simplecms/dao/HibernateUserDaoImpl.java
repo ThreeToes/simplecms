@@ -25,9 +25,15 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.internal.CriteriaImpl.CriterionEntry;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -60,14 +66,11 @@ public class HibernateUserDaoImpl extends AbstractHbnDao<CmsUser> implements Use
         Session sess = getSession();
         Transaction tx = sess.beginTransaction();
         try{
-            SQLQuery q = sess.createSQLQuery("SELECT * FROM cmsuser WHERE username = :username LIMIT 1");
-            q.setString("username", username);
-            List res = q.list();
-            if(res.size() > 0){
-                ret = (CmsUser)res.get(0);
-            }
+            Criteria criteria = sess.createCriteria(CmsUser.class);
+            criteria.add(Restrictions.eq("username", username));
+            ret = (CmsUser)criteria.uniqueResult();
             tx.commit();
-        }catch(Exception e){
+        }catch(HibernateException e){
             tx.rollback();
             throw e;
         }

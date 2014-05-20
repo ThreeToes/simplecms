@@ -20,12 +20,18 @@
 package com.stephengream.simplecms.domain.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -82,7 +88,7 @@ public class CmsUser implements Serializable {
     private Boolean isLocked;
     private Set<Role> roles;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
@@ -92,10 +98,12 @@ public class CmsUser implements Serializable {
     }
 
     public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+        //Lazy initialisation falls over if this is called outside of a session
+        this.roles = new HashSet<>(roles);
     }
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Long getId() {
         return id;
     }

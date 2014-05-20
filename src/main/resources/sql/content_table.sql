@@ -1,6 +1,0 @@
-CREATE TABLE Content (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    created TIMESTAMP NOT NULL,
-    body TEXT NOT NULL
-);
