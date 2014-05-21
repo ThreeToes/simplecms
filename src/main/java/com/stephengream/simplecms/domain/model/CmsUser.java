@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -88,10 +89,9 @@ public class CmsUser implements Serializable {
     private Boolean isLocked;
     private Set<Role> roles;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+    @ManyToMany(
+            targetEntity = com.stephengream.simplecms.domain.model.Role.class,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
             )
     public Set<Role> getRoles() {
         return roles;

@@ -36,7 +36,7 @@
         <prop key="hibernate.show_sql">false</prop>
         <prop key="hibernate.current_session_context_class">thread</prop>
         <prop key="hibernate.hbm2ddl.auto">create</prop>
-        <prop key="hibernate.hbm2ddl.import_files">classpath:/sql/DefaultUsers.sql</prop>
+        <prop key="hibernate.hbm2ddl.import_files">sql/DefaultUsers.sql</prop>
     </util:properties>
     <bean id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">

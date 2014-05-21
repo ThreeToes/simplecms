@@ -55,7 +55,6 @@ public class SimpleCmsUserDetailsService implements UserDetailsService{
                 }
             }
         }catch(Exception e){
-            Logger.getLogger(UserDetails.class.getName()).log(Logger.Level.INFO, "Fucking cunt can't load the shitting cock roles " + e.getMessage());
             Logger.getLogger(UserDetails.class.getName()).log(Logger.Level.INFO, e.getStackTrace());
         }
         
