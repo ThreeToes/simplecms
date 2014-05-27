@@ -12,3 +12,4 @@ blog-4.2: commit from http://www.stephengream.com/blog_entry/spring-framework-4-
 blog-5: commit from http://www.stephengream.com/blog_entry/spring-framework-5-spring-security
 blog-6: commit from http://www.stephengream.com/blog_entry/spring-framework-6-static-content-and-thymeleaf
 blog-7: commit from http://www.stephengream.com/blog_entry/spring-framework-7-integrating-spring-security-thymeleaf-templates
+blog-8: commit from http://www.stephengream.com/blog_entry/spring-framework-8-hibernate-backed-spring-user-backend
