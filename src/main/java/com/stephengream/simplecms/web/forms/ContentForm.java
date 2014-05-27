@@ -11,7 +11,7 @@ public class ContentForm {
     private String title, body;
     
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 1, max = 255, message = "{newcontent.error.titlesize}")
     public String getTitle(){
         return this.title;
     }
@@ -21,7 +21,7 @@ public class ContentForm {
     }
     
     @NotNull
-    @Size(min = 1)
+    @Size(min = 1, message = "{newcontent.error.bodysize}")
     public String getBody(){
         return this.body;
     }

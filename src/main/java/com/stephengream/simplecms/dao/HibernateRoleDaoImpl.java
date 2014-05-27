@@ -20,33 +20,38 @@ package com.stephengream.simplecms.dao;
 
 import com.stephengream.simplecms.domain.model.CmsUser;
 import com.stephengream.simplecms.domain.model.Role;
-import java.util.Set;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.jboss.logging.Logger;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Stephen
  */
-public interface UserDao extends Dao<CmsUser>{
-    /**
-     * Check to see if a username/password combination is valid
-     * @param username
-     * @param passwordHash
-     * @return 
-     */
-    Boolean isValid(String username, String passwordHash);
+@Repository
+public class HibernateRoleDaoImpl extends AbstractHbnDao<Role> implements RoleDao{
+
+    @Override
+    public Role loadByName(String name) {
+        Role ret = null;
+        Session sess = getSession();
+        Transaction tx = sess.beginTransaction();
+        try{
+            Criteria criteria = sess.createCriteria(Role.class);
+            criteria.add(Restrictions.eq("roleName", name));
+            ret = (Role)criteria.uniqueResult();
+            tx.commit();
+        }catch(HibernateException e){
+            tx.rollback();
+            throw e;
+        }
+        return ret;
+    }
     
-    /**
-     * Load a user object by username
-     * @param username
-     * @return 
-     */
-    CmsUser loadByUsername(String username);
-    
-    /**
-     * Create a new user
-     * @param username
-     * @param password
-     * @return 
-     */
-    CmsUser createNewUser(String username, String password, String email, Set<Role> roles);
 }

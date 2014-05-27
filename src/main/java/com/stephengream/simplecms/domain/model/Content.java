@@ -1,11 +1,13 @@
 package com.stephengream.simplecms.domain.model;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,6 +22,18 @@ import javax.validation.constraints.NotNull;
 public class Content {
     private Long id;
     private String body, title;
+    private CmsUser author;
+
+    @ManyToOne(
+            targetEntity = com.stephengream.simplecms.domain.model.CmsUser.class,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    public CmsUser getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(CmsUser author) {
+        this.author = author;
+    }
     private Date created;
     
     @Id

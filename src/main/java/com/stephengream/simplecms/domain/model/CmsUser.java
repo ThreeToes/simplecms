@@ -19,7 +19,10 @@
 
 package com.stephengream.simplecms.domain.model;
 
+import com.stephengream.simplecms.domain.utilities.PasswordHash;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -34,7 +37,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.Cascade;
 
 /**
  *
@@ -86,12 +92,23 @@ public class CmsUser implements Serializable {
     }
     private String passHash;
     private String displayName;
+    private String email;
+
+    @Column(name = "email", length = 512, nullable = false)
+    @NotNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     private Boolean isLocked;
     private Set<Role> roles;
 
     @ManyToMany(
             targetEntity = com.stephengream.simplecms.domain.model.Role.class,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE}
             )
     public Set<Role> getRoles() {
         return roles;
@@ -110,6 +127,18 @@ public class CmsUser implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    /**
+     * Hash the password and set it
+     * @param unhashed The plain text
+     */
+    public void setUnhashedPassword(String unhashed){
+        try {
+            setPassHash(PasswordHash.createHash(unhashed));
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+            Logger.getLogger(CmsUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

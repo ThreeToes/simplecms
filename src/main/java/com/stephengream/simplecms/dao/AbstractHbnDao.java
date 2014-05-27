@@ -63,7 +63,7 @@ public abstract class AbstractHbnDao<T extends Object>
                 method.invoke(t, new Date());
             }catch(Exception e){/*Ignore*/}
         }
-        getSession().save(t);
+        getSession().persist(t);
         tx.commit();
     }
     
@@ -125,7 +125,7 @@ public abstract class AbstractHbnDao<T extends Object>
     @Override
     public void update(T t){
         Transaction tx = getSession().beginTransaction();
-        getSession().update(t);
+        getSession().persist(t);
         tx.commit();
     }
     

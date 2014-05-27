@@ -36,6 +36,7 @@ public class Role {
     private Long id;
 
     @Id
+    @NotNull
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Long getId() {
         return id;

@@ -13,6 +13,7 @@
         <div th:each="node : ${nodes}" class="node-container">
             <h2 th:text="${node.title}" class="node-header">Content title</h2>
             <div th:utext="${node.body}" class="node-body">Content body</div>
+            <div class="user-details"><span th:text="#{content.author}"/> <strong><span th:text="${node.author.displayName}" /></strong> <span th:text="#{content.timestamp}"/> <span th:text="${node.created}" /></div>
         </div>
         </div>
         <div class="footer" th:replace="templates/footer :: footer"></div>

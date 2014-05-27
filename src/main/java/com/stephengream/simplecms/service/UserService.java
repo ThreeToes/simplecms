@@ -16,37 +16,38 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package com.stephengream.simplecms.dao;
+package com.stephengream.simplecms.service;
 
 import com.stephengream.simplecms.domain.model.CmsUser;
-import com.stephengream.simplecms.domain.model.Role;
-import java.util.Set;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Stephen
  */
-public interface UserDao extends Dao<CmsUser>{
-    /**
-     * Check to see if a username/password combination is valid
-     * @param username
-     * @param passwordHash
-     * @return 
-     */
-    Boolean isValid(String username, String passwordHash);
-    
+@Service
+public interface UserService {
     /**
      * Load a user object by username
-     * @param username
-     * @return 
+     * @param username The username to find
+     * @return The CMS user
      */
-    CmsUser loadByUsername(String username);
+    public CmsUser loadCmsUserByName(String username);
+    /**
+     * Save a user's details
+     * @param user The user to save
+     */
+    public void saveUser(CmsUser user);
+    /**
+     * See if a user exists
+     * @param username The user name to check
+     */
+    public Boolean hasUser(String username);
     
     /**
      * Create a new user
      * @param username
-     * @param password
-     * @return 
+     * @param password Plain text password
      */
-    CmsUser createNewUser(String username, String password, String email, Set<Role> roles);
+    public void createUser(String username, String password, String email);
 }

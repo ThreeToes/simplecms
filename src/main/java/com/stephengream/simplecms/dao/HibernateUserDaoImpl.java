@@ -19,21 +19,18 @@
 package com.stephengream.simplecms.dao;
 
 import com.stephengream.simplecms.domain.model.CmsUser;
+import com.stephengream.simplecms.domain.model.Role;
 import com.stephengream.simplecms.domain.utilities.PasswordHash;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.CriteriaImpl.CriterionEntry;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -42,19 +39,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class HibernateUserDaoImpl extends AbstractHbnDao<CmsUser> implements UserDao{
-
     @Override
     public Boolean isValid(String username, String password) {
         Boolean ret = false;
         CmsUser user = loadByUsername(username);
         String correctHash = user.getPassHash();
         try{
-        ret = !user.getIsLocked() && PasswordHash.validatePassword(password, correctHash);
-        }catch(NoSuchAlgorithmException e){
-            //I hate check exceptions, they were a dumb idea
+            ret = !user.getIsLocked() && PasswordHash.validatePassword(password, correctHash);
+        }catch(  NoSuchAlgorithmException | InvalidKeySpecException e){
             Logger.getLogger(HibernateUserDaoImpl.class.getName()).log(Level.SEVERE, null, e);
-        } catch (InvalidKeySpecException ex) {
-            Logger.getLogger(HibernateUserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         return ret;
@@ -78,7 +71,7 @@ public class HibernateUserDaoImpl extends AbstractHbnDao<CmsUser> implements Use
     }
 
     @Override
-    public CmsUser createNewUser(String username, String password) {
+    public CmsUser createNewUser(String username, String password, String email, Set<Role> roles) {
         try {
             String hash = PasswordHash.createHash(password);
             CmsUser user = new CmsUser();
@@ -86,7 +79,9 @@ public class HibernateUserDaoImpl extends AbstractHbnDao<CmsUser> implements Use
             user.setUsername(username);
             user.setIsLocked(false);
             user.setPassHash(hash);
-            this.create(user);
+            user.setRoles(roles);
+            user.setEmail(email);
+            create(user);
             return user;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(HibernateUserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);

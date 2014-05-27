@@ -18,9 +18,11 @@
 
 package com.stephengream.simplecms.authentication;
 
+import com.stephengream.simplecms.dao.RoleDao;
 import com.stephengream.simplecms.dao.UserDao;
 import com.stephengream.simplecms.domain.model.CmsUser;
 import com.stephengream.simplecms.domain.model.Role;
+import com.stephengream.simplecms.service.UserService;
 import java.util.HashSet;
 import java.util.Set;
 import javax.inject.Inject;
@@ -36,9 +38,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * Class to integrate our user type with 
  * @author Stephen
  */
-public class SimpleCmsUserDetailsService implements UserDetailsService{
+public class SimpleCmsUserDetailsService implements UserDetailsService, UserService{
     @Inject
     private UserDao userDao;
+    
+    @Inject
+    private RoleDao roleDao;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,5 +65,37 @@ public class SimpleCmsUserDetailsService implements UserDetailsService{
         
         return new User(u.getUsername(), u.getPassHash(), roles);
     }
-    
+
+    @Override
+    public CmsUser loadCmsUserByName(String username) {
+        return userDao.loadByUsername(username);
+    }
+
+    @Override
+    public void saveUser(CmsUser user) {
+        if(user.getId() == null || !userDao.exists(user.getId())){
+            userDao.create(user);
+        }else{
+            userDao.update(user);
+        }
+    }
+
+    @Override
+    public Boolean hasUser(String username) {
+        //Dirty, and I feel bad doing this
+        try{
+            userDao.loadByUsername(username).getId();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public void createUser(String username, String password, String email) {
+        Role r = roleDao.loadByName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(r);
+        userDao.createNewUser(username, password, email, roles);
+    }
 }

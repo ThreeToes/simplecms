@@ -1,0 +1,67 @@
+/*
+ * Copyright (C) 2014 Stephen
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+package com.stephengream.simplecms.web.forms;
+
+import com.stephengream.simplecms.domain.model.Role;
+import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+/**
+ * Class to represent a user editing their details
+ * @author Stephen
+ */
+public class UserEditForm {
+    private String username, plainPass, displayName, passConfirm;
+
+    public String getPassConfirm() {
+        return passConfirm;
+    }
+
+    public void setPassConfirm(String passConfirm) {
+        this.passConfirm = passConfirm;
+    }
+
+    @NotNull
+    @Size(min = 1, max = 32)
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPlainPass() {
+        return plainPass;
+    }
+
+    public void setPlainPass(String plainPass) {
+        this.plainPass = plainPass;
+    }
+
+    @NotNull
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+}

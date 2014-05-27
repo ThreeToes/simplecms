@@ -26,15 +26,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
         <header th:fragment="header" class="header">
             <div class="text-left nav-links">
                 <ul class="nav nav-pills">
-                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/}" th:text="#{header.label.home}">Home</a></li>
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:utext="#{content.label.topContent}">
                             Content <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/content/}">All content</a></li>
+                            <li><a th:href="@{/content/}" th:text="#{content.label.allContent}">All content</a></li>
                             <li sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a th:href="@{/content/new}">New content</a>
+                                <a th:href="@{/content/new}" th:text="#{content.label.newContent}">New content</a>
                             </li>
                         </ul>
                     </li>
@@ -42,9 +42,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             </div>
             <div class="text-right login-panel">
                 <div sec:authorize="isAuthenticated()">
-                    <p style="text-align: center">Welcome <span sec:authentication="name">Bob</span> | <a th:href="@{/authentication/login?logout}">Logout</a></p>
+                    <p style="text-align: center"> <span th:text="#{header.label.greeting}">Welcome</span> <span sec:authentication="name">Bob</span> | <a th:href="@{/authentication/login?logout}" th:text="#{header.label.logout}">Logout</a></p>
                 </div> 
-                <div sec:authorize="isAnonymous()"><a th:href="@{/authentication/login}" >Login</a></div>
+                <div sec:authorize="isAnonymous()">
+                    <a th:href="@{/authentication/login}" th:text="#{header.label.login}">Login</a> | <a th:href="@{/profile/new}" th:text="#{header.label.signup}">Signup</a>
+                </div>
             </div>
         </header>
     </body>

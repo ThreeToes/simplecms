@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2014 Stephen
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link th:href="@{/resources/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/resources/maintheme/main.css}" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title th:text="#{newcontent.label.pageTitle}">New content node</title>
+    </head>
+    <body>
+        <div class="header" th:replace="templates/header :: header"></div>
+        <div class="container">
+            <div id="newcontent-box">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 th:text="#{newcontent.label.newContent}" class="panel-title">
+                                New Content
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- 
+                                The th:action attribute along with the @ annotated path provide 
+                                an application relative path. This becomes /simplecms/content/new
+                                when Thymeleaf processes the file.
+            
+                                th:object specifies the object in our model to bind form fields
+                                to
+                            -->
+                            <form th:action="@{/profile/new}" th:object="${user}" method="POST">
+                                <div>
+                                    <div class="form-group">
+                                        <label th:text="#{newuser.label.username}">Desired Username</label>
+                                        <!--
+                                            The th:field file binds this to the model
+                                            field named with the *
+                                        -->
+                                        <!-- Input box for the title -->
+                                        <input type="text" th:field="*{username}" class="form-control" />
+                                    </div>
+                                    <!-- Errors for the title field -->
+                                    <!-- 
+                                        th:if should be obvious, we're checking to see if
+                                        the 'title' field has any errors, and will render this
+                                        div if there is any errors
+                                    -->
+                                    <div th:if="${#fields.hasErrors('username')}">
+                                        <!-- 
+                                            th:errors sets the content of this p tag to the
+                                            errors of the title field
+                                        -->
+                                        <p th:errors="*{username}">
+                                            Username field has errors
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label th:text="#{newuser.label.password}">Password</label>
+                                    <!-- Input box for the body field -->
+                                    <input th:field="*{password}" type="password" class="form-control" />
+                                    <!-- Errors found for the body field -->
+                                    <div th:if="${#fields.hasErrors('password')}">
+                                        <p th:errors="*{password}">
+                                            Password field has errors
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label th:text="#{newuser.label.confirmPassword}">Confirm password</label>
+                                    <!-- Input box for the body field -->
+                                    <input th:field="*{passwordConfirm}" type="password" class="form-control" />
+                                    <!-- Errors found for the body field -->
+                                    <div th:if="${#fields.hasErrors('passwordConfirm')}">
+                                        <p th:errors="*{passwordConfirm}">
+                                            Confirm password field has errors
+                                        </p>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label th:text="#{newuser.label.email}">Email address</label>
+                                    <!-- Input box for the body field -->
+                                    <input th:field="*{email}"  class="form-control" />
+                                    <!-- Errors found for the body field -->
+                                    <div th:if="${#fields.hasErrors('email')}">
+                                        <p th:errors="*{email}">
+                                            Confirm password field has errors
+                                        </p>
+                                    </div>
+                                </div> 
+                                <div>
+                                    <div>
+                                        <input type="submit" th:attr="value=#{newcontent.label.submit}" class="btn btn-sm btn-default" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:replace="templates/footer :: footer"></div>
+    </body>
+</html>
+

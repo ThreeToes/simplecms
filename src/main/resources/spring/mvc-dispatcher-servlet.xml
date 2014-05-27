@@ -18,6 +18,7 @@
         <mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	<mvc:view-controller path="/content/contentok" view-name="content/contentok" />
+	<mvc:view-controller path="/profile/newuserok" view-name="profile/newuserok" />
         <mvc:resources mapping="/resources/**" location="/resources/" />
     
         <!-- Load up all controllers in the com.stephengream.simplecms.controllers package. Saves having a seperate bean entry for ever controller -->

@@ -2,13 +2,19 @@ package com.stephengream.simplecms.web.controllers;
 
 import com.stephengream.simplecms.domain.model.Content;
 import com.stephengream.simplecms.service.ContentService;
+import com.stephengream.simplecms.service.UserService;
 import com.stephengream.simplecms.web.forms.ContentForm;
+import java.security.Principal;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/content/")
 public class ContentController {
     @Inject private ContentService contentService;
+    @Inject private UserService userService;
     private static final String VIEW_CONTENT_NEW_CONTENT = "content/newcontent";
     private static final String VIEW_CONTENT_POST_SUCCESS = "redirect:contentok";
     private static final String VIEW_CONTENT_ALL_CONTENT = "content/allContent";
@@ -39,9 +46,12 @@ public class ContentController {
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public String postNewContent(
             @ModelAttribute("content") @Valid ContentForm form,
-            BindingResult result){
+            BindingResult result, Principal principal){
         if(!result.hasErrors()){
-            contentService.create(toContent(form));
+            final Content content = toContent(form);
+            User u = (User)((Authentication) principal).getPrincipal();
+            content.setAuthor(userService.loadCmsUserByName(u.getUsername()));
+            contentService.create(content);
         }
         return result.hasErrors() ? VIEW_CONTENT_NEW_CONTENT : VIEW_CONTENT_POST_SUCCESS;
     }

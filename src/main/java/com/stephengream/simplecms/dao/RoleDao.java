@@ -18,35 +18,17 @@
 
 package com.stephengream.simplecms.dao;
 
-import com.stephengream.simplecms.domain.model.CmsUser;
 import com.stephengream.simplecms.domain.model.Role;
-import java.util.Set;
 
 /**
  *
  * @author Stephen
  */
-public interface UserDao extends Dao<CmsUser>{
+public interface RoleDao extends Dao<Role>{
     /**
-     * Check to see if a username/password combination is valid
-     * @param username
-     * @param passwordHash
-     * @return 
+     * Load up a saved role by name
+     * @param name
+     * @return The role
      */
-    Boolean isValid(String username, String passwordHash);
-    
-    /**
-     * Load a user object by username
-     * @param username
-     * @return 
-     */
-    CmsUser loadByUsername(String username);
-    
-    /**
-     * Create a new user
-     * @param username
-     * @param password
-     * @return 
-     */
-    CmsUser createNewUser(String username, String password, String email, Set<Role> roles);
+    public Role loadByName(String name);
 }
