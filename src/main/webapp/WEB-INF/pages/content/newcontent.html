@@ -15,68 +15,70 @@
     </head>
     <body>
         <div class="header" th:replace="templates/header :: header"></div>
-        <div class="container">
-            <div id="newcontent-box">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 th:text="#{newcontent.label.newContent}" class="panel-title">
-                                New Content
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <!-- 
-                                The th:action attribute along with the @ annotated path provide 
-                                an application relative path. This becomes /simplecms/content/new
-                                when Thymeleaf processes the file.
-            
-                                th:object specifies the object in our model to bind form fields
-                                to
-                            -->
-                            <form th:action="@{/content/new}" th:object="${content}" method="POST">
-                                <div>
-                                    <div class="form-group">
-                                        <label th:text="#{newcontent.label.title}">New content title</label>
-                                        <!--
-                                            The th:field file binds this to the model
-                                            field named with the *
-                                        -->
-                                        <!-- Input box for the title -->
-                                        <input type="text" th:field="*{title}" class="form-control" />
-                                    </div>
-                                    <!-- Errors for the title field -->
-                                    <!-- 
-                                        th:if should be obvious, we're checking to see if
-                                        the 'title' field has any errors, and will render this
-                                        div if there is any errors
-                                    -->
-                                    <div th:if="${#fields.hasErrors('title')}">
-                                        <!-- 
-                                            th:errors sets the content of this p tag to the
-                                            errors of the title field
-                                        -->
-                                        <p th:errors="*{title}">
-                                            Title field has errors
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label th:text="#{newcontent.label.body}">Content body</label>
-                                    <!-- Input box for the body field -->
-                                    <textarea th:field="*{body}" class="form-control" />
-                                    <!-- Errors found for the body field -->
-                                    <div th:if="${#fields.hasErrors('body')}">
-                                        <p th:errors="*{body}">
-                                            Body field has errors
-                                        </p>
-                                    </div>
-                                </div> 
-                                <div>
+        <div class="content">
+            <div class="container">
+                <div id="newcontent-box">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 th:text="#{newcontent.label.newContent}" class="panel-title">
+                                    New Content
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- 
+                                    The th:action attribute along with the @ annotated path provide 
+                                    an application relative path. This becomes /simplecms/content/new
+                                    when Thymeleaf processes the file.
+                
+                                    th:object specifies the object in our model to bind form fields
+                                    to
+                                -->
+                                <form th:action="@{/content/new}" th:object="${content}" method="POST">
                                     <div>
-                                        <input type="submit" th:attr="value=#{newcontent.label.submit}" class="btn btn-sm btn-default" />
+                                        <div class="form-group">
+                                            <label th:text="#{newcontent.label.title}">New content title</label>
+                                            <!--
+                                                The th:field file binds this to the model
+                                                field named with the *
+                                            -->
+                                            <!-- Input box for the title -->
+                                            <input type="text" th:field="*{title}" class="form-control" />
+                                        </div>
+                                        <!-- Errors for the title field -->
+                                        <!-- 
+                                            th:if should be obvious, we're checking to see if
+                                            the 'title' field has any errors, and will render this
+                                            div if there is any errors
+                                        -->
+                                        <div th:if="${#fields.hasErrors('title')}">
+                                            <!-- 
+                                                th:errors sets the content of this p tag to the
+                                                errors of the title field
+                                            -->
+                                            <p th:errors="*{title}">
+                                                Title field has errors
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        <label th:text="#{newcontent.label.body}">Content body</label>
+                                        <!-- Input box for the body field -->
+                                        <textarea th:field="*{body}" class="form-control" />
+                                        <!-- Errors found for the body field -->
+                                        <div th:if="${#fields.hasErrors('body')}">
+                                            <p th:errors="*{body}">
+                                                Body field has errors
+                                            </p>
+                                        </div>
+                                    </div> 
+                                    <div>
+                                        <div>
+                                            <input type="submit" th:attr="value=#{newcontent.label.submit}" class="btn btn-sm btn-default" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
